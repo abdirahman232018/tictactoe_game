@@ -1,3 +1,5 @@
+import time
+
 import tkinter as tk
 from tkinter import messagebox
 import random
@@ -13,9 +15,14 @@ def button_click(row, col):
         # Change the cell's color to yellow
         buttons[row][col]["bg"] = "yellow"
 
+        window.update_idletasks()
+        time.sleep(0.1)  # Pause for a moment to let the display update
+
         # Check if the current player has won
         if check_win(current_player):
+            buttons[row][col]["text"] = current_player
             messagebox.showinfo("Game Over", f"{current_player} wins!")
+
             reset_game()
         # Check if the game is a tie
         elif check_tie():
@@ -45,8 +52,12 @@ def ai_move():
         buttons[row][col]["text"] = current_player
         buttons[row][col]["bg"] = "yellow"  # Change the cell's color to yellow
 
+        window.update_idletasks()
+        time.sleep(0.1)  # Pause for a moment to let the display update
+
         # Check if the AI has won
         if check_win(current_player):
+            buttons[row][col]["text"] = current_player
             messagebox.showinfo("Game Over", f"{current_player} wins!")
             reset_game()
         # Check if the game is a tie
@@ -56,6 +67,7 @@ def ai_move():
         else:
             # If the game isn't over, switch to the other player
             current_player = "X"
+
 
 
 # Function to check for a win
